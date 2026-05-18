@@ -1,15 +1,15 @@
-import { useContext } from 'react';
-import { CounterContext } from '../context/CounterContext';
+import { useCounter } from "../context/CounterContext";
 
-const CounterControls = () => {
-  // Should Add useContext for increment, decrement here...
+function CounterControls() {
+  const { increment, decrement, reset } = useCounter();
 
   return (
-    <>
-      <button>Increment</button>
-      <button>Decrement</button>
-    </>
+    <div>
+      <button onClick={decrement}>Decrement</button>
+      <button onClick={increment}>Increment</button>
+      <button onClick={reset}>Reset</button>
+    </div>
   );
-};
+}
 
 export default CounterControls;

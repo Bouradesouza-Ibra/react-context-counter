@@ -1,17 +1,35 @@
-import { createContext, useState } from 'react';
+import { createContext, useContext, useState } from "react";
 
-export const CounterContext = createContext();
+const CounterContext = createContext();
 
-export const CounterProvider = ({ children }) => {
+export function CounterProvider({ children }) {
   const [count, setCount] = useState(0);
+  const [log, setLog] = useState([]);
 
-  // Add increment & decrement Logic here
+  function increment() {
+    setCount(count + 1);
+    setLog([...log, "Incremented by 1"]);
+  }
+
+  function decrement() {
+    setCount(count - 1);
+    setLog([...log, "Decremented by 1"]);
+  }
+
+  function reset() {
+    setCount(0);
+    setLog([...log, "Counter reset"]);
+  }
 
   return (
-    /* Should look like this */
-    /* <CounterContext.Provider value={{ count, increment, decrement }}> */
-    <CounterContext.Provider value={{ count }}>
+    <CounterContext.Provider
+      value={{ count, increment, decrement, reset, log }}
+    >
       {children}
     </CounterContext.Provider>
   );
-};
+}
+
+export function useCounter() {
+  return useContext(CounterContext);
+}

@@ -1,9 +1,13 @@
-import { useContext } from 'react';
-import { CounterContext } from '../context/CounterContext';
+import { useCounter } from "../context/CounterContext";
 
-const CounterDisplay = () => {
-  const count  = 0; // Change this to use context like this useContext(CounterContext);
-  return <p>Current Count: {count}</p>
-};
+function CounterDisplay() {
+  const { count } = useCounter();
+
+  return (
+    <div>
+      <h2>Counter: {count}</h2>
+    </div>
+  );
+}
 
 export default CounterDisplay;
